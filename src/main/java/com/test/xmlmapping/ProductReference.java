@@ -1,30 +1,20 @@
 package com.test.xmlmapping;
 
+import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
-@XStreamAlias("reference")
+@XStreamAlias("references")
 public class ProductReference {
 	
-	@XStreamAlias("reference")
-	private String source;
+	@XStreamImplicit(itemFieldName = "reference")
+	private List<Reference> reference;
 	
-	@XStreamAlias("href")
-	@XStreamAsAttribute
-	private String link;
-	
+
 	@Override
 	public String toString() {
-		return "ProductReference [source=" + source + ", link=" + link + "] \n ";
-	}
-
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
+		return "ProductReference [reference =" + reference + "] \n ";
 	}
 	
 	

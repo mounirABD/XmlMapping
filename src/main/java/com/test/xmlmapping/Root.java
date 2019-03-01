@@ -1,6 +1,5 @@
 package com.test.xmlmapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -10,11 +9,11 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 public class Root {
 
  	@XStreamImplicit(itemFieldName = "cpe-item")
-    private List<Product> products = new ArrayList<Product>();
+    private List<Product> products;
 
 	@Override
 	public String toString() {
-		return "Root [products=" + products + "]";
+		return "Root [products=" + products + "] \n ";
 	}
 	
 }

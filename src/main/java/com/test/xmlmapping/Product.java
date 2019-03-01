@@ -1,11 +1,7 @@
 package com.test.xmlmapping;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 @XStreamAlias("cpe-item")
 public class Product {
@@ -17,14 +13,12 @@ public class Product {
 	@XStreamAlias("title")
 	private String title;
 	
-	//@XStreamImplicit(itemFieldName = "references")
 	@XStreamAlias("references")
-	//@XStreamImplicit
-	private List<ProductReference> prodref = new ArrayList<ProductReference>();
+	private ProductReference prodref;
 
 	@Override
 	public String toString() {
-		return "\n Product [name=" + name + ", title=" + title + ", \n prodref=" + prodref + "] \n ================= \n ";
+		return "\n Product [nom=" + name + ", title=" + title + ", \n references =" + prodref + "] \n ";
 	}
 
 	public String getName() {
@@ -43,13 +37,7 @@ public class Product {
 		this.title = title;
 	}
 
-	public List<ProductReference> getProdref() {
-		return prodref;
-	}
 
-	public void setProdref(List<ProductReference> prodref) {
-		this.prodref = prodref;
-	}
 	
 	
 	

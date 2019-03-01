@@ -13,6 +13,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 /**
  * Hello world!
@@ -28,10 +30,14 @@ public class App
     {
     	
     	
-    	XStream xstream = new XStream();
+    	XStream xstream = new XStream(new StaxDriver());
     	xstream.ignoreUnknownElements();
+    	
+    	//xstream.setMode(XStream.SINGLE_NODE_XPATH_RELATIVE_REFERENCES);
+    	//xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
+    	
     	xstream.autodetectAnnotations(true);
-    	xstream.processAnnotations(new Class[]{Root.class, Product.class, ProductReference.class});
+    	xstream.processAnnotations(new Class[]{Root.class, Product.class, ProductReference.class, Reference.class});
     	XStream.setupDefaultSecurity(xstream); // to be removed after 1.5
     	xstream.allowTypesByWildcard(new String[] {
     	    "com.test.xmlmapping.**"
