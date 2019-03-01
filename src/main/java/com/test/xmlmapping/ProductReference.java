@@ -14,7 +14,17 @@ public class ProductReference {
 
 	@Override
 	public String toString() {
-		return "ProductReference [reference =" + reference + "] \n ";
+		return " ProductReference [reference =" + reference + "] \n ";
+	}
+
+
+	public List<Reference> getReference() {
+		return reference;
+	}
+
+
+	public void setReference(List<Reference> reference) {
+		this.reference = reference;
 	}
 	
 	

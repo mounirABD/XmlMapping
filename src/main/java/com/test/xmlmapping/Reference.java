@@ -15,7 +15,25 @@ public class Reference {
 
 	@Override
 	public String toString() {
-		return "Reference [source =" + reference + ", href=" + href + "] \n ";
+		return " \n Reference [source =" + reference + ", href=" + href + "] \n ";
 	}
 
+	public String getHref() {
+		return href;
+	}
+
+	public void setHref(String href) {
+		this.href = href;
+	}
+
+	public String getReference() {
+		return reference;
+	}
+
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+	
+	
 }

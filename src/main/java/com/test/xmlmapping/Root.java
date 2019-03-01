@@ -15,5 +15,15 @@ public class Root {
 	public String toString() {
 		return "Root [products=" + products + "] \n ";
 	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
+	
 	
 }

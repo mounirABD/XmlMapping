@@ -21,6 +21,20 @@ public class Product {
 		return "\n Product [nom=" + name + ", title=" + title + ", \n references =" + prodref + "] \n ";
 	}
 
+	
+	
+	public ProductReference getProdref() {
+		return prodref;
+	}
+
+
+
+	public void setProdref(ProductReference prodref) {
+		this.prodref = prodref;
+	}
+
+
+
 	public String getName() {
 		return name;
 	}

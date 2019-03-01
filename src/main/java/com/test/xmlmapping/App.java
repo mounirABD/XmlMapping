@@ -55,8 +55,21 @@ public class App
     	//xstream.addImplicitCollection(Root.class, "products");
     	Root root = (Root) xstream.fromXML(new File("src/main/java/" + CPE_TEST));
     	
-    	System.out.println("Produit | " + root);
+    	for(Product p : root.getProducts()) {
+    		System.out.println("--------------------------------");
+    		System.out.println(" product name : " + p.getName());
+    		System.out.println(" product title : " + p.getTitle());
+    		if(p.getProdref() != null) {
+	    		for (Reference r : p.getProdref().getReference()) {
+	    			System.out.println(" ==> product source  : " + r.getReference());
+	    			System.out.println("      product link : " + r.getHref());
+	    			//System.out.println("");
+	    		}
+    		}
+    		System.out.println("--------------------------------");
+    	}
     	
+    	//System.out.println("Produit name : " + root);
     	
     	
 		/*
