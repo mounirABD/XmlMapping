@@ -32,9 +32,9 @@ public class App
     	
     	XStream xstream = new XStream(new StaxDriver());
     	xstream.ignoreUnknownElements();
-    	
-    	//xstream.setMode(XStream.SINGLE_NODE_XPATH_RELATIVE_REFERENCES);
-    	//xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
+    	xstream.setMode(XStream.NO_REFERENCES);
+    	xstream.setMode(XStream.SINGLE_NODE_XPATH_RELATIVE_REFERENCES);
+    	xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
     	
     	xstream.autodetectAnnotations(true);
     	xstream.processAnnotations(new Class[]{Root.class, Product.class, ProductReference.class, Reference.class});
@@ -44,15 +44,8 @@ public class App
     	});
     	
     	
-    	//xstream.alias("cpe-list",Root.class);
+    	xstream.registerConverter(new ReferenceConverter());
     	
-        //xstream.alias("cpe-item", Product.class);
-        //xstream.aliasField("title", Product.class, "title");
-        //xstream.aliasField("title", Product.class, "title");
-
-       //xstream.alias("item", Item.class);
-    	
-    	//xstream.addImplicitCollection(Root.class, "products");
     	Root root = (Root) xstream.fromXML(new File("src/main/java/" + CPE_TEST));
     	
     	for(Product p : root.getProducts()) {
@@ -60,7 +53,7 @@ public class App
     		System.out.println(" product name : " + p.getName());
     		System.out.println(" product title : " + p.getTitle());
     		if(p.getProdref() != null) {
-	    		for (Reference r : p.getProdref().getReference()) {
+	    		for (Reference r : p.getProdref().getRef()) {
 	    			System.out.println(" ==> product source  : " + r.getReference());
 	    			System.out.println("      product link : " + r.getHref());
 	    			//System.out.println("");
@@ -68,31 +61,6 @@ public class App
     		}
     		System.out.println("--------------------------------");
     	}
-    	
-    	//System.out.println("Produit name : " + root);
-    	
-    	
-		/*
-		 * Node first = doc.getElementsByTagName("tutorial").item(1); NodeList nodeList
-		 * = first.getChildNodes(); int n = nodeList.getLength(); Node current; for (int
-		 * i=0; i<n; i++) { current = nodeList.item(i); if(current.getNodeType() ==
-		 * Node.ELEMENT_NODE) { System.out.println( current.getNodeName() + ": " +
-		 * current.getTextContent()); } }
-		 */
-    	
-		/*
-		 * DocumentBuilder builder =
-		 * DocumentBuilderFactory.newInstance().newDocumentBuilder(); Document doc =
-		 * builder.parse(new File("src/main/java/" + CPE_TEST));
-		 * doc.getDocumentElement().normalize();
-		 * 
-		 * NodeList nodetutorial = doc.getElementsByTagName("cpe-item"); NodeList
-		 * nodeList; for (int i=0; i<nodetutorial.getLength(); i++) { nodeList =
-		 * nodetutorial.item(i).getChildNodes(); Node node; for(int j=0;
-		 * i<nodeList.getLength(); j++) { node = nodeList.item(j); if(node.getNodeType()
-		 * == Node.ELEMENT_NODE) { System.out.println( node.getNodeName() + ": " +
-		 * node.getTextContent()); } } }
-		 */
     	
 
     }

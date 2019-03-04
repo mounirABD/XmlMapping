@@ -2,6 +2,8 @@ package com.test.xmlmapping;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamContainedType;
+import com.thoughtworks.xstream.annotations.XStreamInclude;
 
 @XStreamAlias("reference")
 public class Reference {
@@ -10,7 +12,6 @@ public class Reference {
 	@XStreamAsAttribute
 	private String href;
 	
-	@XStreamAlias("reference")
 	private String reference;
 
 	@Override
