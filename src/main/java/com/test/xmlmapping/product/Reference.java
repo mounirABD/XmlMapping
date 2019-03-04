@@ -1,4 +1,4 @@
-package com.test.xmlmapping;
+package com.test.xmlmapping.product;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;

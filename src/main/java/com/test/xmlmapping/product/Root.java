@@ -1,4 +1,4 @@
-package com.test.xmlmapping;
+package com.test.xmlmapping.product;
 
 import java.util.List;
 

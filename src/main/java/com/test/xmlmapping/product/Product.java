@@ -1,7 +1,13 @@
-package com.test.xmlmapping;
+package com.test.xmlmapping.product;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.converters.collections.ArrayConverter;
 
 @XStreamAlias("cpe-item")
 public class Product {
@@ -13,8 +19,10 @@ public class Product {
 	@XStreamAlias("title")
 	private String title;
 	
-	@XStreamAlias("references")
-	private ProductReference prodref;
+
+	@XStreamConverter(ReferenceConverter.class)
+	@XStreamImplicit(itemFieldName = "references")
+	private List<ProductReference> prodref;
 
 	@Override
 	public String toString() {
@@ -23,13 +31,13 @@ public class Product {
 
 	
 	
-	public ProductReference getProdref() {
+	public List<ProductReference> getProdref() {
 		return prodref;
 	}
 
 
 
-	public void setProdref(ProductReference prodref) {
+	public void setProdref(List<ProductReference> prodref) {
 		this.prodref = prodref;
 	}
 
