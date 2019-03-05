@@ -1,5 +1,6 @@
 package com.test.xmlmapping.cve;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -32,7 +33,7 @@ public class ScoringSystem {
 	private String source;
 	
 	@XStreamAlias("generated-on-datetime")
-	private Date generatedOnDateTime;
+	private LocalDateTime generatedOnDateTime;
 
 	@Override
 	public String toString() {
@@ -106,11 +107,11 @@ public class ScoringSystem {
 		this.source = source;
 	}
 
-	public Date getGeneratedOnDateTime() {
+	public LocalDateTime getGeneratedOnDateTime() {
 		return generatedOnDateTime;
 	}
 
-	public void setGeneratedOnDateTime(Date generatedOnDateTime) {
+	public void setGeneratedOnDateTime(LocalDateTime generatedOnDateTime) {
 		this.generatedOnDateTime = generatedOnDateTime;
 	}
 	

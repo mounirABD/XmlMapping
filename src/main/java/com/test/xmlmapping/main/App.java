@@ -4,9 +4,18 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,6 +34,7 @@ import com.test.xmlmapping.product.Reference;
 import com.test.xmlmapping.product.ReferenceConverter;
 import com.test.xmlmapping.product.Root;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
@@ -38,7 +48,7 @@ public class App
 	
 	public static final String CPE_NAME = "official-cpe-dictionary_v2.3.xml";
 	public static final String CPE_TEST = "test.xml";
-	public static final String CPE_TEST02 = "test02.xml";
+	public static final String CPE_TEST02 = "nvdcve-2.0-recent.xml";
 	
     public static void main( String[] args ) throws SAXException, IOException, ParserConfigurationException
     {
@@ -92,27 +102,32 @@ public class App
     	xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
     	
     	xstream.autodetectAnnotations(true);
-    	xstream.processAnnotations(new Class[]{RootVul.class, Vulnerability.class});
+    	xstream.processAnnotations(new Class[]{RootVul.class});
     	XStream.setupDefaultSecurity(xstream); // to be removed after 1.5
     	xstream.allowTypesByWildcard(new String[] {
     	    "com.test.xmlmapping.**"
     	});
     	
     	
-    	xstream.registerConverter(
-                new DateConverter("yyyy-MM-dd'T'HH:mm", new String[] {"yyyy-MM-dd HH:mm"},new GregorianCalendar().getTimeZone()){
-                  public boolean canConvert(Class type) {
-                        return type.equals(LocalDateTime.class) || type.equals(Timestamp.class);
-                  }
-                  public String toString(Object obj) {
-                      return new SimpleDateFormat("yyyy-MM-dd HH:mm").format((LocalDateTime) obj);
-                  }
-            });
+    	xstream.registerConverter(new AbstractSingleValueConverter() {
+			@Override
+			public Object fromString(String str) {
+		    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		    	LocalDateTime dateTime = LocalDateTime.parse(ZonedDateTime.parse(str).format(formatter));
+			    return  dateTime;
+			}
+			@Override
+			public boolean canConvert(Class type) {
+				return type.equals(LocalDateTime.class);
+			}
+		});
     	
     	RootVul root = (RootVul) xstream.fromXML(new File("src/main/java/" + CPE_TEST02));
     	
     	System.out.println(root);
     	
+    	
+
     }
     
 }
