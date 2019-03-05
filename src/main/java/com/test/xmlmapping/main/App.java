@@ -48,7 +48,7 @@ public class App
 	
 	public static final String CPE_NAME = "official-cpe-dictionary_v2.3.xml";
 	public static final String CPE_TEST = "test.xml";
-	public static final String CPE_TEST02 = "nvdcve-2.0-recent.xml";
+	public static final String CPE_TEST02 = "test02.xml";
 	
     public static void main( String[] args ) throws SAXException, IOException, ParserConfigurationException
     {
